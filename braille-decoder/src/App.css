@@ -61,6 +61,23 @@
   background-color: black;
 }
 
+.form {
+  font-size: 5vh;
+  height: 6vh;
+}
+
+
+.decodedLetter {
+  font-size: 15vh;
+  padding-left: 5vh;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

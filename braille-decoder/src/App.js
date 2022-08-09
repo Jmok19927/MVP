@@ -4,13 +4,14 @@ import DecoderContainer from './decoderContainer.jsx';
 function App() {
   return (
     <div className="App">
-      Braille Decoder
       <header className="App-header">
       <div>
-        Main Clickable Component
+        Braille Decoder
         <DecoderContainer/>
       </div>
-      <div>Extra Info</div>
+      <div>
+        Click 'Add' or . on your keyboard to add the current letter to the textbox.
+      </div>
       </header>
     </div>
   );

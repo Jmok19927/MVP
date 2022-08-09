@@ -1,8 +1,6 @@
-import React from 'react';
 
-var BrailleDictionary = (props) => {
-  let toggles = '';
-  let dictionary = {
+  //dictionary for the braille dots into letters in binary, left to right, top to bottom.
+  let BrailleDictionary = {
     '100000' : 'A',
     '101000' : 'B',
     '110000' : 'C',
@@ -29,22 +27,14 @@ var BrailleDictionary = (props) => {
     '110011' : 'X',
     '110111' : 'Y',
     '100111' : 'Z'
-
-
   }
-  Object.keys(props.values).forEach((position) => {
-    if (props.values[position]) {
-      toggles += 1;
-    } else {
-      toggles += 0;
-    }
-  })
-  console.log(toggles);
+  // console.log(Object.keys(props.values).slice(0,6))
 
 
-  return (
-    <div>{dictionary[toggles] || '?'}</div>
-  )
-}
+//   return (
+//     //letter is a ? if not found in the dictionary
+//     <div>{dictionary[toggles] || '?'}</div>
+//   )
+// }
 
-export default BrailleDictionary;
+module.exports = BrailleDictionary;
