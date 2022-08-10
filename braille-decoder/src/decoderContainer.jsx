@@ -2,6 +2,8 @@ import React from 'react';
 import Dot from './Dot.jsx';
 import dict from './BrailleDictionary.js';
 import InputBox from './InputBox.jsx';
+import RecentSearches from './recentSearches.jsx';
+import axios from 'axios';
 
 class DecoderContainer extends React.Component {
   constructor(props){
@@ -14,17 +16,46 @@ class DecoderContainer extends React.Component {
       BL: false,
       BR: false,
       string: '',
+      searches: [],
     }
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:8000/searches').then((data) => {
+      console.log(data.data);
+      this.updateSearches();
+    })
+  }
+
   handleKeyPress(e, letter) {
-    if (e.key === '.') {
+    //adding ways to push to textbox
+    if (e.key === '.' || e.key === 'Enter') {
       this.addLetter(letter);
       this.resetState()
+    }
+    //toggle the dots using left side of numpad
+    if (e.key === '7') {
+      this.toggle('TL');
+    }
+    if (e.key === '8') {
+      this.toggle('TR');
+    }
+    if (e.key === '4') {
+      this.toggle('ML');
+    }
+    if (e.key === '5') {
+      this.toggle('MR');
+    }
+    if (e.key === '1') {
+      this.toggle('BL');
+    }
+    if (e.key === '2') {
+      this.toggle('BR');
     }
   }
 
   resetState() {
+    //reset all dots to be blank
     this.setState({
       TL: false,
       TR: false,
@@ -35,6 +66,22 @@ class DecoderContainer extends React.Component {
     })
   }
 
+  handleNutrimatic() {
+    console.log('entered handle nutrimatic');
+    axios.post('http://localhost:8000/searches', {search: this.state.string}).then(() => {
+      this.updateSearches();
+    })
+  }
+
+  updateSearches() {
+    var updatedSearches = [];
+    axios.get('http://localhost:8000/searches').then((data) => {
+      updatedSearches = data.data;
+      this.setState({searches: data.data});
+
+    })
+  }
+
   toggle(position) {
     this.setState({[position]: !this.state[position]})
   }
@@ -42,7 +89,6 @@ class DecoderContainer extends React.Component {
   handleStringChange(e) {
     let newString = e.target.value;
     this.setState({string: newString})
-    console.log(this.state.string)
   }
 
   addLetter(letter) {
@@ -104,7 +150,17 @@ class DecoderContainer extends React.Component {
           binaryToggles={binaryToggles}
           handleAddClick={this.addLetter.bind(this)}
           />
+        <div>
+          Click Add, ' . ' or 'Enter' to add the current letter to the textbox.
+        </div>
+        <a href={`https://nutrimatic.org/?q=%3C${this.state.string.replaceAll('?', 'A')}%3E&go=Go`} target="_blank" rel="noreferrer" onClick={this.handleNutrimatic.bind(this)} className="button">Anagram on Nutrimatic</a>
+        <div>Recent searches:
+          {this.state.searches.map((search, index) => {
+            return <RecentSearches search={search.search} key={index}/>
+          })}
+        </div>
       </div>
+
 
     )
   }

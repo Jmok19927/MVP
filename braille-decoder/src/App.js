@@ -9,9 +9,6 @@ function App() {
         Braille Decoder
         <DecoderContainer/>
       </div>
-      <div>
-        Click 'Add' or . on your keyboard to add the current letter to the textbox.
-      </div>
       </header>
     </div>
   );
