@@ -24,6 +24,8 @@ class DecoderContainer extends React.Component {
     axios.get('http://localhost:8000/searches').then((data) => {
       console.log(data.data);
       this.updateSearches();
+    }).catch((err) => {
+      this.updateSearches();
     })
   }
 
@@ -74,11 +76,10 @@ class DecoderContainer extends React.Component {
   }
 
   updateSearches() {
-    var updatedSearches = [];
     axios.get('http://localhost:8000/searches').then((data) => {
-      updatedSearches = data.data;
       this.setState({searches: data.data});
-
+    }).catch((err) => {
+      console.error(err);
     })
   }
 
