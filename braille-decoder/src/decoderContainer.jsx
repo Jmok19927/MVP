@@ -126,17 +126,17 @@ class DecoderContainer extends React.Component {
         {this.handleKeyPress(event, dict[binaryToggles])}}
       tabIndex='0'
       >
-        <div className='DotRow'>
-          <Dot toggled={this.state.TL} position={'TL'} handleClick={this.toggle.bind(this)}/>
-          <Dot toggled={this.state.TR} position={'TR'} handleClick={this.toggle.bind(this)}/>
+               <div className='DotRow'>
+          <Dot toggled={this.state.TL} number={'7'} position={'TL'} handleClick={this.toggle.bind(this)}/>
+          <Dot toggled={this.state.TR} number={'8'} position={'TR'} handleClick={this.toggle.bind(this)}/>
         </div>
         <div className='DotRow'>
-          <Dot toggled={this.state.ML} position={'ML'} handleClick={this.toggle.bind(this)}/>
-          <Dot toggled={this.state.MR} position={'MR'} handleClick={this.toggle.bind(this)}/>
+          <Dot toggled={this.state.ML} number={'4'} position={'ML'} handleClick={this.toggle.bind(this)}/>
+          <Dot toggled={this.state.MR} number={'5'} position={'MR'} handleClick={this.toggle.bind(this)}/>
         </div>
         <div className='DotRow'>
-          <Dot toggled={this.state.BL} position={'BL'} handleClick={this.toggle.bind(this)}/>
-          <Dot toggled={this.state.BR} position={'BR'} handleClick={this.toggle.bind(this)}/>
+          <Dot toggled={this.state.BL} number={'1'} position={'BL'} handleClick={this.toggle.bind(this)}/>
+          <Dot toggled={this.state.BR} number={'2'} position={'BR'} handleClick={this.toggle.bind(this)}/>
         </div>
 
         <div className='flex'>
@@ -154,7 +154,9 @@ class DecoderContainer extends React.Component {
         <div>
           Click Add, ' . ' or 'Enter' to add the current letter to the textbox.
         </div>
-        <a href={`https://nutrimatic.org/?q=%3C${this.state.string.replaceAll('?', 'A')}%3E&go=Go`} target="_blank" rel="noreferrer" onClick={this.handleNutrimatic.bind(this)} className="button">Anagram on Nutrimatic</a>
+        <div>
+          <a href={`https://nutrimatic.org/?q=%3C${this.state.string.replaceAll('?', 'A')}%3E&go=Go`} onClick={this.handleNutrimatic.bind(this)} target="_blank" rel="noreferrer" className="button button-primary ">Anagram on Nutrimatic</a>
+        </div>
         <div>Recent searches:
           {this.state.searches.map((search, index) => {
             return <RecentSearches search={search.search} key={index}/>

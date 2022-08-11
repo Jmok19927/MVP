@@ -16,6 +16,7 @@ app.get('/searches', (req, res) => {
 })
 
 app.post('/searches', (req, res) => {
+  console.log('got post of', req.body.search);
   var newDbSearch = new db.Search({search: req.body.search});
   newDbSearch.save();
   console.log(req.body.search, 'saved')

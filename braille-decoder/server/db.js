@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-
-mongoose.connect('mongodb+srv://username:p4ssword@brailledecoder.wdbtzba.mongodb.net/brailledecoder?retryWrites=true&w=majority')
+const uri = 'mongodb+srv://username:p4ssword@brailledecoder.wdbtzba.mongodb.net/brailledecoder?retryWrites=true&w=majority'
+// const uri = 'mongodb+srv://username:p4ssword@brailledecoder.hqmzdmy.mongodb.net/brailledecoder?retryWrites=true&w=majority'
+mongoose.connect(uri);
 
 const searchSchema = new mongoose.Schema({
   search: String
